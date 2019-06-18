@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animal Collectives</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div id="start-screen">Match the animals!</div>
+    <div id="quiz" style="display:none;">
+        <div id="animal-img"><img src="img.png"></div>
+        <div id="question"><p>Question</p></div>
+        <div id="timer">
+            <div id="counter">10</div>
+            <div id="gaugeContainer"></div>
+            <div id="time-guage"></div>
+        </div>
+        <div id="options">
+            <div class="option" id="A" onclick="checkAnswer('A')">A</div>
+            <div class="option" id="B" onclick="checkAnswer('B')">B</div>
+            <div class="option" id="C" onclick="checkAnswer('C')">C</div>
+            <div class="option" id="D" onclick="checkAnswer('D')">D</div>
+        </div>
+    </div>
+    <div id="end-screen" style="display: none;">
+        <img src="endimg.png"><p>50%</p>
+    </div>
+
+    <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>
