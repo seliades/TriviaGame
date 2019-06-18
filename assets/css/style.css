@@ -1,7 +1,118 @@
-.container {
-    align-content: center;
+body{
+    font-size: 20px;
+    font-family: monospace;
+    background-image: url(../images/animals-assorted-background-1249159.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+.header{
+    opacity: .8;
+}
+#game-container{
+    margin : 20px auto;
+    background-color: white;
+    height: 300px;
+    width : 800px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 15px 0px;
+    position: relative;
+}
+#start-screen{
+    font-size: 1.5em;
+    font-weight: bolder;
+    word-break: break-all;
+    width:150px;
+    height:100px;
+    border : 2px solid lightgrey;
+    text-align: center;
+    cursor: pointer;
+    padding-top: 25px;
+    position: absolute;
+    left:300px;
+    top:50px;
+    color : lightgrey;
+}
+#start-screen:hover{
+    border: 3px solid lightseagreen;
+    color : lightseagreen;
 }
 
-body {
-    background-image: url();
+#animal-img{
+    width : 200px;
+    height : 200px;
+    position: absolute;
+    left : 0px;
+    top : 0px;
+}
+#animal-img img{
+    width : 200px;
+    height : 200px;
+    border-top-left-radius: 5px;
+}
+
+#question{
+    width: 600px;
+    height : 125px;
+    position: absolute;
+    right:0;
+    top:0;
+}
+#question p{
+    margin : 0;
+    padding : 15px;
+    font-size: 1.25em;
+}
+
+#options{
+    width : 480px;
+    position: absolute;
+    right : 0;
+    top : 75px;
+    padding : 10px
+}
+.option{
+    display: block;
+    width : 200px;
+    text-align: center;
+    border : 1px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+    padding : 5px;
+}
+.option:hover{
+    border : 2px solid grey;
+    font-weight: bold;
+}
+
+#timer{
+    position: absolute;
+    height : 100px;
+    width : 200px;
+    bottom : 0px;
+    text-align: center;
+}
+#counter{
+    font-size: 3em;
+}
+#end-screen{
+    margin : 20px auto;
+    background-color: white;
+    opacity: 0.8;
+    height: 300px;
+    width : 800px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 15px 0px;
+    position: relative;
+    display: none;
+}
+#end-screen p{
+    position: absolute;
+    display: block;
+    width: 59px;
+    height: 59px;
+    top: 130px;
+    left: 325px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
 }

@@ -3,7 +3,6 @@ var quiz = document.getElementById("quiz");
 var animalImg = document.getElementById("animal-img");
 var question = document.getElementById("question");
 var counter = document.getElementById("counter");
-var timeGauge = document.getElementById("time-guage");
 var optionA = document.getElementById("A");
 var optionB = document.getElementById("B");
 var optionC = document.getElementById("C");
@@ -13,7 +12,7 @@ var endScreen = document.getElementById("end-screen");
 var questions = [
     {
         question: "What do you call a group of gorillas?",
-        imgSrc: "",
+        imgSrc: "./assets/images/gorilla.jpg",
         optionA: "A band",
         optionB: "A bunch",
         optionC: "A kong",
@@ -22,7 +21,7 @@ var questions = [
     },
     {
         question: "What do you call a group of stingrays?",
-        imgSrc: "",
+        imgSrc: "./assets/images/stingray.jpg",
         optionA: "A glide",
         optionB: "A school",
         optionC: "A fever",
@@ -31,7 +30,7 @@ var questions = [
     },
     {
         question: "What do you call a group of cobras?",
-        imgSrc: "",
+        imgSrc: "./assets/images/cobra.png",
         optionA: "A basket",
         optionB: "A quiver",
         optionC: "A nightmare",
@@ -40,7 +39,7 @@ var questions = [
     },
     {
         question: "What do you call a group of toads?",
-        imgSrc: "",
+        imgSrc: "./assets/images/toad.jpg",
         optionA: "A plague",
         optionB: "A knot",
         optionC: "A council",
@@ -49,7 +48,7 @@ var questions = [
     },
     {
         question: "What do you call a group of bears?",
-        imgSrc: "",
+        imgSrc: "./assets/images/bear.jpg",
         optionA: "A bevy",
         optionB: "A baloo",
         optionC: "A troop",
@@ -58,7 +57,7 @@ var questions = [
     },
     {
         question: "What do you call a group of ferrets?",
-        imgSrc: "",
+        imgSrc: "./assets/images/ferrets.png",
         optionA: "A tangle",
         optionB: "A colony",
         optionC: "A business",
@@ -67,7 +66,7 @@ var questions = [
     },
     {
         question: "What do you call a group of skunks?",
-        imgSrc: "",
+        imgSrc: "./assets/images/skunk.jpg",
         optionA: "A stench",
         optionB: "A rankness",
         optionC: "A squad",
@@ -76,7 +75,7 @@ var questions = [
     },
     {
         question: "What do you call a group of parrots?",
-        imgSrc: "",
+        imgSrc: "./assets/images/parrot.jpg",
         optionA: "A cacophony",
         optionB: "A pulchritude",
         optionC: "A discord",
@@ -85,7 +84,7 @@ var questions = [
     },
     {
         question: "What do you call a group of lemurs?",
-        imgSrc: "",
+        imgSrc: "./assets/images/lemur.png",
         optionA: "A league",
         optionB: "A conspiracy",
         optionC: "A shadow",
@@ -94,20 +93,23 @@ var questions = [
     },
     {
         question: "What do you call a group of porcupines?",
-        imgSrc: "",
+        imgSrc: "./assets/images/porcupine.png",
         optionA: "A prickle",
         optionB: "A poke",
         optionC: "A cuddle",
         optionD: "A puddle",
         correct: "A",
-    }    
+    }
 ];
 
-var lastQuestionIndex = questions.length - 1;
-var runningQuestionIndex = 0;
+var lastQuestion = questions.length - 1;
+var runningQuestion = 0;
+var score = 0;
+var count = 10;
+var timer;
 
-function renderQuestion(){
-    var q = questions[runningQuestionIndex];
+function renderQuestion() {
+    var q = questions[runningQuestion];
     animalImg.innerHTML = "<img src=" + q.imgSrc + ">";
     question.innerHTML = "<p>" + q.question + "</p>";
     optionA.innerHTML = q.optionA;
@@ -116,49 +118,57 @@ function renderQuestion(){
     optionD.innerHTML = q.optionD;
 };
 
-function answerIsRight(){};
+startScreen.addEventListener("click", startQuiz);
 
-function answerIsWrong(){};
+function startQuiz() {
+    startScreen.style.display = "none";
+    quiz.style.display = "block";
+    renderQuestion();
+    renderCounter();
+    timer = setInterval(renderCounter, 8000);
+};
 
-function renderScore(){};
 
-var questionTime = 10;
-var gaugeWidth = 150;
-var count = 10;
-var gaugeProgressUnit = gaugeWidth/questionTime;
-
-function renderCounter(){
-    if(count < 0){
-        counter.innerHTML = count;
-        timeGauge.style.width = gaugeProgressUnit * count + "px";
+function renderCounter() {
+    if (count < 0) {
+        counter.innerHTML = "<p>" + count + "</p>";
         count--;
-    }else {
+    } else {
         count = 0;
         answerIsWrong();
-        if (runningQuestionIndex < lastQuestionIndex) {
-            runningQuestionIndex++;
+        if (runningQuestion < lastQuestion) {
+            runningQuestion++;
             renderQuestion();
-        }else {
+        } else {
             clearInterval(timer);
             renderScore();
         }
     }
 };
 
-var timer = setInterval(renderCounter, 1000);
 
-function checkAnswer(answer){
-    if(questions[runningQuestionIndex].correct == answer){
+function answerIsRight() { };
+
+function answerIsWrong() { };
+
+function renderScore() {
+    endScreen.style.display = "block";
+    var scorePercent = Math.round(100 * score / questions.length);
+    endScreen.innerHTML = "<p> You got " + scorePercent + " % correct! </p>";
+};
+
+function checkAnswer(answer) {
+    if (answer == questions[runningQuestion].correct) {
         score++;
         answerIsCorrect();
-    }else {
+    } else {
         answerIsWrong();
     }
-    if (runningQuestionIndex < lastQuestionIndex) {
-        count = 10;
-        runningQuestionIndex++;
+    count = 10;
+    if (runningQuestion < lastQuestion) {
+        runningQuestion++;
         renderQuestion();
-    }else {
+    } else {
         clearInterval(timer);
         renderScore();
     }
